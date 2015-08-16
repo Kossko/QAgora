@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace QAgoraForum.Models
 {
@@ -18,6 +19,8 @@ namespace QAgoraForum.Models
         public string content { get; set; }
         public bool readed { get; set; }
         public virtual ApplicationUser Reciver { get; set; }
+        public virtual Message AnswerFor { get; set; }
+
     }
 
     public class Section
@@ -42,7 +45,6 @@ namespace QAgoraForum.Models
     {
         public int Id { get; set; }
         public int Permision { get; set; }
-        public string Title { get; set; }
         public DateTime? Date { get; set; }
         public virtual ApplicationUser Owner { get; set; }
         public bool IsOpen { get; set; }
@@ -50,6 +52,32 @@ namespace QAgoraForum.Models
         public string PrimaryPost { get; set; }
         public virtual Section SectionId { get; set; }
     }
+
+    public class Post
+    {
+        public int Id { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
+        public DateTime Date { get; set; }
+        public string Title { get; set; }
+        public string content { get; set; }
+        public virtual Post AnswerFor { get; set; }
+    }
+
+    public class Permition
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class RolePermition
+    {
+        public int Id { get; set; }
+        public virtual IdentityRole Role { get; set; }
+        public virtual Permition Permition { get; set; }
+    }
+
+
 
     [Serializable]
     public class XmlPost

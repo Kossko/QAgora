@@ -23,8 +23,6 @@ namespace QAgoraForum.Controllers
             List<SectionPanel> result;
             if(User.Identity.IsAuthenticated)
             {
-                //string userRoleName=UM.GetRoles(User.Identity.GetUserId()).FirstOrDefault();
-                //string userRole = db.Roles.FirstOrDefault(r=>r.Name.Equals(userRoleName)).Id;
                 int userRole = respository.GetUserRole(User.Identity.GetUserId());
                 result= sectionPanels.Where(panel => userRole<=panel.Visibility).ToList();
             }
@@ -51,13 +49,8 @@ namespace QAgoraForum.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Section section)
         {
-            //string userId = User.Identity.GetUserId();
-            //section.Owner = respository.getUser(User.Identity.GetUserId());
-            //section.Panel = db.SectionPanels.FirstOrDefault(s=>s.Id==section.Panel.Id);
             if (ModelState.IsValid)
             {
-                //db.Sections.Add(section);
-                //db.SaveChanges();
                 respository.AddPanel(section, User.Identity.GetUserId());
                 return RedirectToAction("Index");
             }
@@ -89,9 +82,6 @@ namespace QAgoraForum.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit( Section section)
         {
-            //string userId = User.Identity.GetUserId();
-            //section.Owner = db.Users.FirstOrDefault(u => u.Id.Equals(userId));
-            //section.Panel = db.SectionPanels.FirstOrDefault(s => s.Id == section.Panel.Id);
             if (!ModelState.IsValid) return View(section);
             respository.EditSection(section, User.Identity.GetUserId());
             return RedirectToAction("Index");
@@ -153,7 +143,7 @@ namespace QAgoraForum.Controllers
         public ActionResult Details(int Id)
         {
             List<Topic> topics = respository.GetSectionTopics(Id);
-            ViewBag.Title = topics.FirstOrDefault().SectionId.Title;
+            ViewBag.Title = respository.GetSection(Id).Title;
             ViewBag.SectionID = Id;
             return View(topics);
         }

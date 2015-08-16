@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -173,8 +174,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\TopicsController.cs" />
     <Compile Include="Engine\Helpers.cs" />
@@ -307,10 +310,16 @@
     <Content Include="Views\Topics\Index.cshtml" />
     <Content Include="Views\Shared\_modalWindow.cshtml" />
     <Content Include="Views\Account\_LoginPartialView.cshtml" />
+    <Content Include="Views\Search\FindUser.cshtml" />
+    <Content Include="Views\Messages\_AnswerForm.cshtml" />
+    <Content Include="Views\Messages\_ReadFromNavbar.cshtml" />
+    <Content Include="Views\Topics\GiveAnswer.cshtml" />
+    <Content Include="Views\Topics\userInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="TopicsStorage\" />
+    <Folder Include="Views\AdminPanel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
